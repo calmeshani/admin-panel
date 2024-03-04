@@ -1,10 +1,10 @@
-import { BellFilled, MailOutlined } from "@ant-design/icons";
 import { Badge, Drawer, Image, List, Space, Typography } from "antd";
+import { BellFilled, MailOutlined } from "@ant-design/icons";
+import { getComments, getOrders } from "../../API";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Logo from "../../Images/Logo.png";
 import "../AppHeader/index.css";
-import { getComments, getOrders } from "../../API";
-import { useState, useEffect } from "react";
-import Item from "antd/es/list/Item";
 
 const AppHeader = () => {
   const [comment, setComment] = useState([]);
@@ -22,9 +22,18 @@ const AppHeader = () => {
       setOrders(res.products);
     });
   }, []);
+  const navigate = useNavigate();
   return (
     <div className="AppHeader">
-      <Image width={50} src={Logo}></Image>
+      <Image
+        width={50}
+        style={{ cursor: "pointer" }}
+        src={Logo}
+        preview={false}
+        onClick={() => {
+          navigate("/");
+        }}
+      ></Image>
       <Typography.Title>Funwood Dashboard</Typography.Title>
       <Space>
         <Badge count={comment.length} dot>
@@ -45,7 +54,7 @@ const AppHeader = () => {
         </Badge>
       </Space>
       <Drawer
-        title="comments"
+        title="Comments"
         open={commentsOpen}
         onClose={() => {
           setCommentsOpen(false);
@@ -60,7 +69,7 @@ const AppHeader = () => {
         ></List>
       </Drawer>
       <Drawer
-        title="notifications"
+        title="Notifications"
         open={notificationOpen}
         onClose={() => {
           setNotificationOpen(false);
