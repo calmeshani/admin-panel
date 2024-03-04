@@ -1,12 +1,12 @@
 import { Card, Space, Statistic, Table, Typography } from "antd";
+import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
 import {
   getCustomers,
   getInventory,
   getOrders,
   getRevenue,
 } from "../../../API";
-import { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
 import "../Dashboard/index.css";
 import {
   DollarOutlined,
@@ -23,6 +23,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -156,6 +157,7 @@ const RecentOrders = () => {
       <Typography.Text>Recent Orders</Typography.Text>
       <Table
         columns={[
+          { id: 1 },
           { title: "Title", dataIndex: "title" },
           { title: "Quantity", dataIndex: "quantity" },
           { title: "Price", dataIndex: "discountedPrice" },
